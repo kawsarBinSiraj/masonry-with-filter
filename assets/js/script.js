@@ -16,9 +16,35 @@
  */
 
 $(window).on('load', function () {
+    
+     // init 
+    // Masonry with filter
+    $(function () {
+       setTimeout(function(){
+             // masonry init
+            var masonry = new Masonry($('#masonry-grid-row').get()[0], {
+                itemSelector: ".grid-thumbnail"
+            });
 
-    // code should be execute here
+            $grid = $('#masonry-grid-row').isotope({
+                itemSelector: '.grid-thumbnail',
+                layoutMode: 'masonry',
+                masonry: {
+                    gutter: 0
+                }
+            });
 
+            // filter activity
+            $('#filters').on('click', 'button', function () {
+                var filterValue = $(this).attr('data-filter');
+                $grid.isotope({ filter: filterValue });
+                $('#filters button').removeClass('btn-primary').addClass('btn-info');
+                $(this).addClass('btn-primary').removeClass('btn-info');
+            });
+       }, 100)
+        
+        
+    });
 });
 
 
@@ -30,33 +56,6 @@ $(window).on('load', function () {
  */
 
 $(document).ready(function () {
-
-
-    // init 
-    // Masonry with filter
-    $(function () {
-        // masonry init
-        var masonry = new Masonry($('#masonry-grid-row').get()[0], {
-            itemSelector: ".grid-thumbnail"
-        });
-
-        $grid = $('#masonry-grid-row').isotope({
-            itemSelector: '.grid-thumbnail',
-            layoutMode: 'masonry',
-            masonry: {
-                gutter: 0
-            }
-        });
-
-        // filter activity
-        $('#filters').on('click', 'button', function () {
-            var filterValue = $(this).attr('data-filter');
-            $grid.isotope({ filter: filterValue });
-            $('#filters button').removeClass('btn-primary').addClass('btn-info');
-            $(this).addClass('btn-primary').removeClass('btn-info');
-        });
-
-    });
 
 
 });
